@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const discordTTS=require("discord-tts");// text to speech for discord
 require("@discordjs/opus")
 const bot = new Discord.Client();
 const token = process.env.BOT_TOKEN;
@@ -33,12 +34,18 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   if(oldCannel==null&&newChannel!=null){
     console.log("someone joined in channel"+ newChannel.name)
     let connection=await newChannel.join()
-    setTimeout(()=>connection.play("./Hallo.mp3"),1500)
+    setTimeout(()=>{
+      connection.play("./Hallo.mp3")
+      connection.play(discordTTS.getVoiceStream("Username"))
+    },1500)
   }else if(newChannel==null){
     console.log("someone left channel"+oldCannel.name)
   }else{
     console.log("someone switched to channel"+ newChannel.name)
     let connection=await newChannel.join()
-     setTimeout(()=>connection.play("./Hallo.mp3"),1500)
+     setTimeout(()=>{
+       connection.play("./Hallo.mp3")
+       connection.play(discordTTS.getVoiceStream("Username"))
+     },1500)
   }
 })
