@@ -34,6 +34,7 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on("voiceStateUpdate",async (old_m,new_m)=>{
+  try{
   if(old_m.member.id==bot.user.id){
     return
   }
@@ -57,13 +58,13 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
       })
     },1000)
   }else{
-    let connection=await newChannel.join()
+    let connection=await oldChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./Tschuess.mp3")
       hallospeech.on("speaking",speaking=>{
         if(!speaking){
           //Hallo file has finished playing
-          let dispatcher=connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE",2))
+          let dispatcher=connection.play(discordTTS.getVoiceStream(old_m.member.displayName,"de-DE",2))
           dispatcher.on("speaking",speaking=>{
             if(!speaking){
               connection.disconnect()
@@ -73,5 +74,9 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
       })
     },1000)
   }
+  
+}catch(err){
+  console.log(err)
+}
   
 })
