@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+require("@discordjs/opus")
 const bot = new Discord.Client();
 const token = process.env.BOT_TOKEN;
 bot.login(token);
