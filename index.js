@@ -36,8 +36,13 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     let connection=await newChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./Hallo.mp3")
-      hallospeech.on("end",()=>{
+      hallospeech.on("speaking",speaking=>{
+    
+        console.log("test")
+            if(!speaking){
         connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
+              
+            }
       })
       
     },1500)
@@ -48,8 +53,12 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     let connection=await newChannel.join()
      setTimeout(()=>{
         let hallospeech=connection.play("./Hallo.mp3")
-      hallospeech.on("end",()=>{
+      hallospeech.on("speaking",speaking=>{
+        console.log("test")
+        if(!speaking){
         connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
+          
+        }
       })
       
      },1500)
