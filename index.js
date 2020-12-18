@@ -17,7 +17,12 @@ bot.on('message', async msg => {
 	  msg.channel.send("HALLO")
 		if (msg.member.voice.channel) {
 			let connection = await msg.member.voice.channel.join();
-			connection.play('./audio/Hallo.mp3');
+			let hallospeech=connection.play('./audio/Hallo.mp3');
+			hallospeech.on("speaking",speaking=>{
+			  if(!speaking){
+			    connection.disconnect()
+			  }
+			})
 		}
 	}
 }catch(err){
