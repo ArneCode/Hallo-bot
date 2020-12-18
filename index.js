@@ -56,7 +56,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
           })
         }
       })
-    },1000)
+    },1500)
   }else{
     let connection=await oldChannel.join()
     setTimeout(()=>{
@@ -72,7 +72,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
           })
         }
       })
-    },1000)
+    },1500)
   }
   
 }catch(err){
