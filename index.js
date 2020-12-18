@@ -35,8 +35,11 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     console.log("someone joined in channel"+ newChannel.name)
     let connection=await newChannel.join()
     setTimeout(()=>{
-      connection.play("./Hallo.mp3")
-      connection.play(discordTTS.getVoiceStream("Username"))
+      let hallospeech=connection.play("./Hallo.mp3")
+      hallospeech.on("end"()=>{
+        connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
+      })
+      
     },1500)
   }else if(newChannel==null){
     console.log("someone left channel"+oldCannel.name)
@@ -44,8 +47,11 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     console.log("someone switched to channel"+ newChannel.name)
     let connection=await newChannel.join()
      setTimeout(()=>{
-       connection.play("./Hallo.mp3")
-       connection.play(discordTTS.getVoiceStream("Username"))
+        let hallospeech=connection.play("./Hallo.mp3")
+      hallospeech.on("end"()=>{
+        connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
+      })
+      
      },1500)
   }
 })
