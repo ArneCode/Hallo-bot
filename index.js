@@ -33,12 +33,12 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   if(oldCannel==null&&newChannel!=null){
     console.log("someone joined in channel"+ newChannel.name)
     let connection=await newChannel.join()
-    setTimeout(()=>connection.play("./Hallo.mp3"),5000)
+    setTimeout(()=>connection.play("./Hallo.mp3"),1500)
   }else if(newChannel==null){
     console.log("someone left channel"+oldCannel.name)
   }else{
     console.log("someone switched to channel"+ newChannel.name)
     let connection=await newChannel.join()
-     setTimeout(()=>connection.play("./Hallo.mp3"),5000)
+     setTimeout(()=>connection.play("./Hallo.mp3"),1500)
   }
 })
