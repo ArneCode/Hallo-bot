@@ -28,5 +28,5 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on("voiceStateUpdate",async (old_m,new_m)=>{
-  console.log(new_m)
+  console.log(new_m.channel,old_m.channel)
 })
