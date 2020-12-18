@@ -44,7 +44,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     
         console.log("test")
             if(!speaking){
-        connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE"))
+        connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE",2))
               
             }
       })
@@ -60,7 +60,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
       hallospeech.on("speaking",speaking=>{
         console.log("test")
         if(!speaking){
-        connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE"))
+        connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE",2))
           
         }
       })
