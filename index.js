@@ -38,7 +38,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   if(newChannel!=null){
     let connection=await newChannel.join()
     setTimeout(()=>{
-      let hallospeech=connection.play("./audio/Tschuess.mp3")
+      let hallospeech=connection.play("./audio/Hallo.mp3")
       hallospeech.on("speaking",speaking=>{
         if(!speaking){
           //Hallo file has finished playing
@@ -54,7 +54,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   }else{
     let connection=await newChannel.join()
     setTimeout(()=>{
-      let hallospeech=connection.play("./Hallo.mp3")
+      let hallospeech=connection.play("./Tschuess.mp3")
       hallospeech.on("speaking",speaking=>{
         if(!speaking){
           //Hallo file has finished playing
