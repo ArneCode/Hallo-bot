@@ -36,7 +36,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     let connection=await newChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./Hallo.mp3")
-      hallospeech.on("end"()=>{
+      hallospeech.on("end",()=>{
         connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
       })
       
@@ -48,7 +48,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     let connection=await newChannel.join()
      setTimeout(()=>{
         let hallospeech=connection.play("./Hallo.mp3")
-      hallospeech.on("end"()=>{
+      hallospeech.on("end",()=>{
         connection.play(discordTTS.getVoiceStream(new_m.member.displayName))
       })
       
