@@ -28,5 +28,13 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on("voiceStateUpdate",async (old_m,new_m)=>{
-  console.log(new_m.channel,old_m.channel)
+  let oldCannel=old_m.channel
+  let newChannel=new_m.channel
+  if(oldCannel==null&&newChannel!=null){
+    console.log("someone joined in channel"+ newChannel.name)
+  }else if(newChannel==null){
+    console.log("someone left channel"+oldCannel.name)
+  }else{
+    console.log("someone switched to channel"+ newChannel.name)
+  }
 })
