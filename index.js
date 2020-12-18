@@ -37,7 +37,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   let newChannel=new_m.channel
   if(newChannel!=null){
     let connection=await newChannel.join()
-    connection.on("ready",()=>{
+    setTimeout(()=>{
       let hallospeech=connection.play("./Hallo.mp3")
       hallospeech.on("speaking",speaking=>{
         if(!speaking){
@@ -50,7 +50,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
           })
         }
       })
-    })
+    },1500)
   }
   
 })
