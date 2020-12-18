@@ -12,7 +12,7 @@ bot.on('guildMemberAdd', async member => {
 bot.on('message', async msg => {
   try{
 	//console.log(msg);
-	if (msg.content.toLowerCase() == 'hallo'&&msg.author.id!=bot.user.id) {
+	if (["hallo","hi","guten tag","moin"].includes(msg.content.toLowerCase())&&msg.author.id!=bot.user.id) {
 	  console.log(msg.content)
 	  msg.channel.send("HALLO")
 		if (msg.member.voice.channel) {
