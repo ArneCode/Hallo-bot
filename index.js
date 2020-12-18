@@ -58,7 +58,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
         }
       })
     },1500)
-  }else{
+  }else if(newChannel==null&&oldChannel!=null){
     let connection=await oldChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./audio/Tschuess.mp3")
