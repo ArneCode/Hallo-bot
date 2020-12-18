@@ -39,7 +39,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
     return
   }
 
-  let oldCannel=old_m.channel
+  let oldChannel=old_m.channel
   let newChannel=new_m.channel
   if(newChannel!=null){
     let connection=await newChannel.join()
