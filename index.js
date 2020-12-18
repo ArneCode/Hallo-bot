@@ -17,7 +17,7 @@ bot.on('message', async msg => {
 	  msg.channel.send("HALLO")
 		if (msg.member.voice.channel) {
 			let connection = await msg.member.voice.channel.join();
-			connection.play('./Hallo.mp3');
+			connection.play('./audio/Hallo.mp3');
 		}
 	}
 }catch(err){
@@ -36,6 +36,22 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   let oldCannel=old_m.channel
   let newChannel=new_m.channel
   if(newChannel!=null){
+    let connection=await newChannel.join()
+    setTimeout(()=>{
+      let hallospeech=connection.play("./audio/Tschuess.mp3")
+      hallospeech.on("speaking",speaking=>{
+        if(!speaking){
+          //Hallo file has finished playing
+          let dispatcher=connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE",2))
+          dispatcher.on("speaking",speaking=>{
+            if(!speaking){
+              connection.disconnect()
+            }
+          })
+        }
+      })
+    },1500)
+  }else{
     let connection=await newChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./Hallo.mp3")
