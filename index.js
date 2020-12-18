@@ -27,3 +27,7 @@ bot.on('message', async msg => {
 bot.on('ready', () => {
 	console.log('ready');
 });
+bot.on("voiceStateUpdate",async (old_m,new_m)=>{
+  let newVoice=new_m.voiceChannel
+  console.log(newVoice)
+})
