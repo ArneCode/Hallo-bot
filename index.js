@@ -29,6 +29,9 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on("voiceStateUpdate",async (old_m,new_m)=>{
+  if(old_m.member.id==bot.user.id){
+    return
+  }
   let oldCannel=old_m.channel
   let newChannel=new_m.channel
   if(oldCannel==null&&newChannel!=null){
