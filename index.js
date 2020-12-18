@@ -9,7 +9,7 @@ bot.on('guildMemberAdd', async member => {
 	connection.play('./Hallo.mp3');
 });
 bot.on('message', async msg => {
-  
+  try{
 	//console.log(msg);
 	if (msg.content.toLowerCase() == 'hallo'&&msg.author.id!=bot.user.id) {
 	  console.log(msg.content)
@@ -19,6 +19,10 @@ bot.on('message', async msg => {
 			connection.play('./Hallo.mp3');
 		}
 	}
+}catch(err){
+  msg.channel.send(err.stack)
+}
+  
 });
 bot.on('ready', () => {
 	console.log('ready');
