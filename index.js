@@ -8,8 +8,9 @@ bot.on('guildMemberAdd', async member => {
 	connection.play('./Hallo.mp3');
 });
 bot.on('message', async msg => {
-	console.log(msg);
-	if (msg.content.toLowerCase() == 'hallo') {
+  
+	//console.log(msg);
+	if (msg.content.toLowerCase() == 'hallo'&&msg.author.id!=bot.user.id) {
 		if (msg.member.voice.channel) {
 			let connection = await msg.member.voice.channel.join();
 			connection.play('./Hallo.mp3');
