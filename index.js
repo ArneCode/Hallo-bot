@@ -11,6 +11,7 @@ bot.on('message', async msg => {
   
 	//console.log(msg);
 	if (msg.content.toLowerCase() == 'hallo'&&msg.author.id!=bot.user.id) {
+	  msg.channel.send("HALLO")
 		if (msg.member.voice.channel) {
 			let connection = await msg.member.voice.channel.join();
 			connection.play('./Hallo.mp3');
