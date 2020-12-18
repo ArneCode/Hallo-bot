@@ -42,7 +42,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
 
   let oldChannel=old_m.channel
   let newChannel=new_m.channel
-  if(newChannel!=null){
+  if(newChannel!=null&&oldChannel==null){
     let connection=await newChannel.join()
     setTimeout(()=>{
       let hallospeech=connection.play("./audio/Hallo.mp3")
