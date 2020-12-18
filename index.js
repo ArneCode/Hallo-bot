@@ -60,7 +60,7 @@ bot.on("voiceStateUpdate",async (old_m,new_m)=>{
   }else{
     let connection=await oldChannel.join()
     setTimeout(()=>{
-      let hallospeech=connection.play("./Tschuess.mp3")
+      let hallospeech=connection.play("./audio/Tschuess.mp3")
       hallospeech.on("speaking",speaking=>{
         if(!speaking){
           //Hallo file has finished playing
