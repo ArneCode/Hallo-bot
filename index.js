@@ -9,21 +9,21 @@ bot.on('guildMemberAdd', async member => {
 	let connection = await member.voice.channel.join();
 	connection.play('./Hallo.mp3');
 });
-let enabled=true
+let enabled = true;
 bot.on('message', async msg => {
 	try {
 		//console.log(msg);
-		if(!enabled){
-		  if(RegExp(/hallo enable/i).test(msg.content)){
-		  enabled=true
-		  msg.channel.send("I am now active")
+		if (!enabled) {
+			if (RegExp(/hallo enable/i).test(msg.content)) {
+				enabled = true;
+				msg.channel.send('I am now active');
+			}
+			console.log('returning, because I am not enabled');
+			return;
 		}
-		console.log("returning, because I am not enabled")
-		return
-		}
-		if(RegExp(/hallo disable/i).test(msg.content.toLowerCase())){
-		  enabled=false
-		   msg.channel.send("I am now not active anymore")
+		if (RegExp(/hallo disable/i).test(msg.content.toLowerCase())) {
+			enabled = false;
+			msg.channel.send('I am now not active anymore');
 		}
 		if (
 			['hallo', 'hi', 'guten tag', 'moin', 'hello', 'servus'].includes(
@@ -51,9 +51,9 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on('voiceStateUpdate', async (old_m, new_m) => {
-  if(!enabled){
-    return
-  }
+	if (!enabled) {
+		return;
+	}
 	try {
 		if (old_m.member.id == bot.user.id) {
 			return;
@@ -62,7 +62,7 @@ bot.on('voiceStateUpdate', async (old_m, new_m) => {
 		let oldChannel = old_m.channel;
 		let newChannel = new_m.channel;
 		if (newChannel != null && oldChannel == null) {
-		  console.log(`${new_m.member.displayName} joined ${newChannel}. HALLO!`)
+			console.log(`${new_m.member.displayName} joined ${newChannel}. HALLO!`);
 			let connection = await newChannel.join();
 			setTimeout(() => {
 				let hallospeech = connection.play('./audio/Hallo.mp3');
@@ -81,7 +81,7 @@ bot.on('voiceStateUpdate', async (old_m, new_m) => {
 				});
 			}, 1500);
 		} else if (newChannel == null && oldChannel != null) {
-		   console.log(`${old_m.member.displayName} left ${oldChannel}. Tschüss!`)
+			console.log(`${old_m.member.displayName} left ${oldChannel}. Tschüss!`);
 			let connection = await oldChannel.join();
 			setTimeout(() => {
 				let hallospeech = connection.play('./audio/Tschuess.mp3');
