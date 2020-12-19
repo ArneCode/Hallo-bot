@@ -18,9 +18,10 @@ bot.on('message', async msg => {
 		  enabled=true
 		  msg.channel.send("I am now active")
 		}
+		console.log("returning, because I am not enabled")
 		return
 		}
-		if(RegExp(/hallo disable/i).test(msg.content)){
+		if(RegExp(/hallo disable/i).test(msg.content.toLowerCase())){
 		  enabled=false
 		   msg.channel.send("I am now not active anymore")
 		}
