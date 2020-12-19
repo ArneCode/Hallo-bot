@@ -62,7 +62,7 @@ bot.on('voiceStateUpdate', async (old_m, new_m) => {
 		let oldChannel = old_m.channel;
 		let newChannel = new_m.channel;
 		if (newChannel != null && oldChannel == null) {
-			console.log(`${new_m.member.displayName} joined ${newChannel}. HALLO!`);
+			console.log(`${new_m.member.displayName} joined ${newChannel.name}. HALLO!`);
 			let connection = await newChannel.join();
 			setTimeout(() => {
 				let hallospeech = connection.play('./audio/Hallo.mp3');
@@ -81,7 +81,7 @@ bot.on('voiceStateUpdate', async (old_m, new_m) => {
 				});
 			}, 1500);
 		} else if (newChannel == null && oldChannel != null) {
-			console.log(`${old_m.member.displayName} left ${oldChannel}. Tschüss!`);
+			console.log(`${old_m.member.displayName} left ${oldChannel.name}. Tschüss!`);
 			let connection = await oldChannel.join();
 			setTimeout(() => {
 				let hallospeech = connection.play('./audio/Tschuess.mp3');
