@@ -9,9 +9,19 @@ bot.on('guildMemberAdd', async member => {
 	let connection = await member.voice.channel.join();
 	connection.play('./Hallo.mp3');
 });
+let enabled=true
 bot.on('message', async msg => {
 	try {
 		//console.log(msg);
+		if(!enabled){
+		  if(RegExp(/hallo enable/i).test(msg.content)){
+		  enabled=true
+		}
+		return
+		}
+		if(RegExp(/hallo disable/i).test(msg.content)){
+		  enabled=false
+		}
 		if (
 			['hallo', 'hi', 'guten tag', 'moin', 'hello', 'servus'].includes(
 				msg.content.toLowerCase()
