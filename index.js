@@ -16,11 +16,13 @@ bot.on('message', async msg => {
 		if(!enabled){
 		  if(RegExp(/hallo enable/i).test(msg.content)){
 		  enabled=true
+		  msg.channel.send("I am now active")
 		}
 		return
 		}
 		if(RegExp(/hallo disable/i).test(msg.content)){
 		  enabled=false
+		   msg.channel.send("I am now not active anymore")
 		}
 		if (
 			['hallo', 'hi', 'guten tag', 'moin', 'hello', 'servus'].includes(
