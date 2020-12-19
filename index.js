@@ -48,6 +48,9 @@ bot.on('ready', () => {
 	console.log('ready');
 });
 bot.on('voiceStateUpdate', async (old_m, new_m) => {
+  if(!enabled){
+    return
+  }
 	try {
 		if (old_m.member.id == bot.user.id) {
 			return;
