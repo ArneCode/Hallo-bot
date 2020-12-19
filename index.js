@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const discordTTS=require("discord-tts");// text to speech for discord
-require("@discordjs/opus")
+const discordTTS = require('discord-tts'); // text to speech for discord
+require('@discordjs/opus');
 const bot = new Discord.Client();
 const token = process.env.BOT_TOKEN;
 bot.login(token);
@@ -10,73 +10,81 @@ bot.on('guildMemberAdd', async member => {
 	connection.play('./Hallo.mp3');
 });
 bot.on('message', async msg => {
-  try{
-	//console.log(msg);
-	if (["hallo","hi","guten tag","moin"].includes(msg.content.toLowerCase())&&msg.author.id!=bot.user.id) {
-	  console.log(msg.content)
-	  msg.channel.send("HALLO")
-		if (msg.member.voice.channel) {
-			let connection = await msg.member.voice.channel.join();
-			let hallospeech=connection.play('./audio/Hallo.mp3');
-			hallospeech.on("speaking",speaking=>{
-			  if(!speaking){
-			    connection.disconnect()
-			  }
-			})
+	try {
+		//console.log(msg);
+		if (
+			['hallo', 'hi', 'guten tag', 'moin', 'hello', 'servus'].includes(
+				msg.content.toLowerCase()
+			) &&
+			msg.author.id != bot.user.id
+		) {
+			console.log(msg.content);
+			msg.channel.send('HALLO');
+			if (msg.member.voice.channel) {
+				let connection = await msg.member.voice.channel.join();
+				let hallospeech = connection.play('./audio/Hallo.mp3');
+				hallospeech.on('speaking', speaking => {
+					if (!speaking) {
+						connection.disconnect();
+					}
+				});
+			}
 		}
+	} catch (err) {
+		console.log(err.stack);
 	}
-}catch(err){
-  console.log(err.stack)
-}
-  
 });
 bot.on('ready', () => {
 	console.log('ready');
 });
-bot.on("voiceStateUpdate",async (old_m,new_m)=>{
-  try{
-  if(old_m.member.id==bot.user.id){
-    return
-  }
+bot.on('voiceStateUpdate', async (old_m, new_m) => {
+	try {
+		if (old_m.member.id == bot.user.id) {
+			return;
+		}
 
-  let oldChannel=old_m.channel
-  let newChannel=new_m.channel
-  if(newChannel!=null&&oldChannel==null){
-    let connection=await newChannel.join()
-    setTimeout(()=>{
-      let hallospeech=connection.play("./audio/Hallo.mp3")
-      hallospeech.on("speaking",speaking=>{
-        if(!speaking){
-          //Hallo file has finished playing
-          let dispatcher=connection.play(discordTTS.getVoiceStream(new_m.member.displayName,"de-DE",2))
-          dispatcher.on("speaking",speaking=>{
-            if(!speaking){
-              connection.disconnect()
-            }
-          })
-        }
-      })
-    },1500)
-  }else if(newChannel==null&&oldChannel!=null){
-    let connection=await oldChannel.join()
-    setTimeout(()=>{
-      let hallospeech=connection.play("./audio/Tschuess.mp3")
-      hallospeech.on("speaking",speaking=>{
-        if(!speaking){
-          //Hallo file has finished playing
-          let dispatcher=connection.play(discordTTS.getVoiceStream(old_m.member.displayName,"de-DE",2))
-          dispatcher.on("speaking",speaking=>{
-            if(!speaking){
-              connection.disconnect()
-            }
-          })
-        }
-      })
-    },1500)
-  }
-  
-}catch(err){
-  console.log(err)
-}
-  
-})
+		let oldChannel = old_m.channel;
+		let newChannel = new_m.channel;
+		if (newChannel != null && oldChannel == null) {
+		  console.log(`${new_m.member.displayName} joined ${newChannel}. HALLO!`)
+			let connection = await newChannel.join();
+			setTimeout(() => {
+				let hallospeech = connection.play('./audio/Hallo.mp3');
+				hallospeech.on('speaking', speaking => {
+					if (!speaking) {
+						//Hallo file has finished playing
+						let dispatcher = connection.play(
+							discordTTS.getVoiceStream(new_m.member.displayName, 'de-DE', 2)
+						);
+						dispatcher.on('speaking', speaking => {
+							if (!speaking) {
+								connection.disconnect();
+							}
+						});
+					}
+				});
+			}, 1500);
+		} else if (newChannel == null && oldChannel != null) {
+		   console.log(`${old_m.member.displayName} left ${oldChannel}. Tschüss!`)
+			let connection = await oldChannel.join();
+			setTimeout(() => {
+				let hallospeech = connection.play('./audio/Tschuess.mp3');
+				hallospeech.on('speaking', speaking => {
+					if (!speaking) {
+						//Hallo file has finished playing
+						let dispatcher = connection.play(
+							discordTTS.getVoiceStream(old_m.member.displayName, 'de-DE', 2)
+						);
+						dispatcher.on('speaking', speaking => {
+							if (!speaking) {
+								connection.disconnect();
+							}
+						});
+					}
+				});
+			}, 1500);
+		}
+	} catch (err) {
+		console.log(err);
+	}
+});
