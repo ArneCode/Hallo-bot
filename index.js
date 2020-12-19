@@ -10,7 +10,6 @@ bot.on('guildMemberAdd', async member => {
 	connection.play('./Hallo.mp3');
 });
 bot.on('message', async msg => {
-  console.log(msg.guild.id)
   try{
 	//console.log(msg);
 	if (["hallo","hi","guten tag","moin"].includes(msg.content.toLowerCase())&&msg.author.id!=bot.user.id) {
@@ -27,7 +26,7 @@ bot.on('message', async msg => {
 		}
 	}
 }catch(err){
-  msg.channel.send(err.stack)
+  console.log(err.stack)
 }
   
 });
